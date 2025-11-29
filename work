@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Math Guide & Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f9f9f9; }
+        h1 { color: #333; }
+        .section { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 6px #eee; }
+        input, button { padding: 6px; margin: 4px 0; }
+        .question { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Simple Math Guide & Calculator</h1>
+
+    <div class="section">
+        <h2>Math Guide</h2>
+        <ul>
+            <li><b>Addition:</b> a + b (e.g., 2 + 3 = 5)</li>
+            <li><b>Subtraction:</b> a - b (e.g., 5 - 2 = 3)</li>
+            <li><b>Multiplication:</b> a × b (e.g., 4 × 3 = 12)</li>
+            <li><b>Division:</b> a ÷ b (e.g., 10 ÷ 2 = 5)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Math Questions</h2>
+        <div class="question">
+            <span>What is 7 + 5?</span>
+            <input type="number" id="q1" />
+            <button onclick="checkAnswer(1, 12)">Check</button>
+            <span id="a1"></span>
+        </div>
+        <div class="question">
+            <span>What is 9 × 3?</span>
+            <input type="number" id="q2" />
+            <button onclick="checkAnswer(2, 27)">Check</button>
+            <span id="a2"></span>
+        </div>
+        <div class="question">
+            <span>What is 15 ÷ 5?</span>
+            <input type="number" id="q3" />
+            <button onclick="checkAnswer(3, 3)">Check</button>
+            <span id="a3"></span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculator</h2>
+        <input type="number" id="num1" placeholder="First number" />
+        <select id="op">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">×</option>
+            <option value="/">÷</option>
+        </select>
+        <input type="number" id="num2" placeholder="Second number" />
+        <button onclick="calculate()">Calculate</button>
+        <div id="calcResult"></div>
+    </div>
+
+    <script>
+        function checkAnswer(qNum, correct) {
+            const userAns = document.getElementById('q' + qNum).value;
+            const result = document.getElementById('a' + qNum);
+            if (userAns === "") {
+                result.textContent = " Please enter an answer.";
+                result.style.color = "orange";
+            } else if (Number(userAns) === correct) {
+                result.textContent = " Correct!";
+                result.style.color = "green";
+            } else {
+                result.textContent = " Incorrect.";
+                result.style.color = "red";
+            }
+        }
+
+        function calculate() {
+            const n1 = parseFloat(document.getElementById('num1').value);
+            const n2 = parseFloat(document.getElementById('num2').value);
+            const op = document.getElementById('op').value;
+            let res = '';
+            if (isNaN(n1) || isNaN(n2)) {
+                res = "Please enter both numbers.";
+            } else {
+                switch(op) {
+                    case '+': res = n1 + n2; break;
+                    case '-': res = n1 - n2; break;
+                    case '*': res = n1 * n2; break;
+                    case '/': 
+                        res = n2 === 0 ? "Cannot divide by zero." : (n1 / n2); 
+                        break;
+                }
+            }
+            document.getElementById('calcResult').textContent = "Result: " + res;
+        }
+    </script>
+</body>
+</html>
